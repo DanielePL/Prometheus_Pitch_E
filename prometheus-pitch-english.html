@@ -572,102 +572,13 @@
                 <div class="logo-icon">⚡</div>
                 <div class="logo-text">PROMETHEUS</div>
             </div>
-        
-        <!-- Slide 10: SUMMARY -->
-        <div class="slide" id="slide10">
-            <h1 class="slide-title">WHY PROMETHEUS</h1>
             
-            <div class="centered-content">
-                <div class="quote-main">
-                    <p>• Revolutionary technology that makes strength training more precise and effective</p>
-                    <p>• Win-win business model for athletes, coaches, and investors</p>
-                    <p>• 82% lower customer acquisition costs through royalty model</p>
-                    <p>• 417% ROI over 5 years without equity dilution</p>
-                    <p>• Realistic projections with 15,000 users by year 5</p>
-                </div>
-                
-                <div style="margin-top: 40px;">
-                    <p style="font-size: 1.1rem; color: #ddd; margin-bottom: 20px;">I greatly appreciate your entrepreneurial vision and interest in Prometheus. Beyond just capital, I'm seeking a mentor who believes in the future of intelligent coaching and wants to contribute their experience to the success of this promising project. As a strategic partner, you'll not only gain insight into our development through monthly updates but also be actively involved in our progress through integration into our Slack development chat and participation in selected team calls.</p>
-                </div>
-                
-                <p class="quote-closing">
-                    "Prometheus brings the fire of knowledge to every athlete and revolutionizes how we train, coach, and improve."
-                </p>
+            <div class="controls">
+                <button class="btn" id="prevBtn">◀ Previous</button>
+                <div class="slide-counter" id="slideCounter">1 / 10</div>
+                <button class="btn" id="nextBtn">Next ▶</button>
             </div>
         </div>
-    </div>
-
-    <script>
-        // Simple, robust code for navigation
-        document.addEventListener('DOMContentLoaded', function() {
-            // Navigation buttons
-            var prevBtn = document.getElementById('prevBtn');
-            var nextBtn = document.getElementById('nextBtn');
-            var counter = document.getElementById('slideCounter');
-            
-            // Find all slides
-            var slides = document.querySelectorAll('.slide');
-            var currentSlideIndex = 0;
-            var totalSlides = slides.length;
-            
-            // Function to show current slide and hide others
-            function showSlide(index) {
-                // Hide all slides
-                for (var i = 0; i < slides.length; i++) {
-                    slides[i].classList.remove('active');
-                }
-                
-                // Show current slide
-                slides[index].classList.add('active');
-                
-                // Update counter
-                counter.textContent = (index + 1) + ' / ' + totalSlides;
-                
-                // Disable back button if first slide
-                prevBtn.disabled = index === 0;
-                prevBtn.style.opacity = index === 0 ? '0.5' : '1';
-                
-                // Disable next button if last slide
-                nextBtn.disabled = index === totalSlides - 1;
-                nextBtn.style.opacity = index === totalSlides - 1 ? '0.5' : '1';
-            }
-            
-            // Event listener for next button
-            nextBtn.addEventListener('click', function() {
-                if (currentSlideIndex < totalSlides - 1) {
-                    currentSlideIndex++;
-                    showSlide(currentSlideIndex);
-                }
-            });
-            
-            // Event listener for previous button
-            prevBtn.addEventListener('click', function() {
-                if (currentSlideIndex > 0) {
-                    currentSlideIndex--;
-                    showSlide(currentSlideIndex);
-                }
-            });
-            
-            // Keyboard navigation
-            document.addEventListener('keydown', function(e) {
-                // Right arrow key
-                if (e.key === 'ArrowRight' && currentSlideIndex < totalSlides - 1) {
-                    currentSlideIndex++;
-                    showSlide(currentSlideIndex);
-                }
-                // Left arrow key
-                else if (e.key === 'ArrowLeft' && currentSlideIndex > 0) {
-                    currentSlideIndex--;
-                    showSlide(currentSlideIndex);
-                }
-            });
-            
-            // Initialization
-            showSlide(currentSlideIndex);
-        });
-    </script>
-</body>
-</html>
         
         <!-- Slide 9: STATUS & TIMELINE -->
         <div class="slide" id="slide9">
@@ -822,13 +733,102 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Slide 10: SUMMARY -->
+        <div class="slide" id="slide10">
+            <h1 class="slide-title">WHY PROMETHEUS</h1>
             
-            <div class="controls">
-                <button class="btn" id="prevBtn">◀ Previous</button>
-                <div class="slide-counter" id="slideCounter">1 / 10</div>
-                <button class="btn" id="nextBtn">Next ▶</button>
+            <div class="centered-content">
+                <div class="quote-main">
+                    <p>• Revolutionary technology that makes strength training more precise and effective</p>
+                    <p>• Win-win business model for athletes, coaches, and investors</p>
+                    <p>• 82% lower customer acquisition costs through royalty model</p>
+                    <p>• 417% ROI over 5 years without equity dilution</p>
+                    <p>• Realistic projections with 15,000 users by year 5</p>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 1.1rem; color: #ddd; margin-bottom: 20px;">I greatly appreciate your entrepreneurial vision and interest in Prometheus. Beyond just capital, I'm seeking a mentor who believes in the future of intelligent coaching and wants to contribute their experience to the success of this promising project. As a strategic partner, you'll not only gain insight into our development through monthly updates but also be actively involved in our progress through integration into our Slack development chat and participation in selected team calls.</p>
+                </div>
+                
+                <p class="quote-closing">
+                    "Prometheus brings the fire of knowledge to every athlete and revolutionizes how we train, coach, and improve."
+                </p>
             </div>
         </div>
+    </div>
+
+    <script>
+        // Simple, robust code for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation buttons
+            var prevBtn = document.getElementById('prevBtn');
+            var nextBtn = document.getElementById('nextBtn');
+            var counter = document.getElementById('slideCounter');
+            
+            // Find all slides
+            var slides = document.querySelectorAll('.slide');
+            var currentSlideIndex = 0;
+            var totalSlides = slides.length;
+            
+            // Function to show current slide and hide others
+            function showSlide(index) {
+                // Hide all slides
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].classList.remove('active');
+                }
+                
+                // Show current slide
+                slides[index].classList.add('active');
+                
+                // Update counter
+                counter.textContent = (index + 1) + ' / ' + totalSlides;
+                
+                // Disable back button if first slide
+                prevBtn.disabled = index === 0;
+                prevBtn.style.opacity = index === 0 ? '0.5' : '1';
+                
+                // Disable next button if last slide
+                nextBtn.disabled = index === totalSlides - 1;
+                nextBtn.style.opacity = index === totalSlides - 1 ? '0.5' : '1';
+            }
+            
+            // Event listener for next button
+            nextBtn.addEventListener('click', function() {
+                if (currentSlideIndex < totalSlides - 1) {
+                    currentSlideIndex++;
+                    showSlide(currentSlideIndex);
+                }
+            });
+            
+            // Event listener for previous button
+            prevBtn.addEventListener('click', function() {
+                if (currentSlideIndex > 0) {
+                    currentSlideIndex--;
+                    showSlide(currentSlideIndex);
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                // Right arrow key
+                if (e.key === 'ArrowRight' && currentSlideIndex < totalSlides - 1) {
+                    currentSlideIndex++;
+                    showSlide(currentSlideIndex);
+                }
+                // Left arrow key
+                else if (e.key === 'ArrowLeft' && currentSlideIndex > 0) {
+                    currentSlideIndex--;
+                    showSlide(currentSlideIndex);
+                }
+            });
+            
+            // Initialization
+            showSlide(currentSlideIndex);
+        });
+    </script>
+</body>
+</html>
         
         <!-- Slide 1: TITLE - Introduction and Problem -->
         <div class="slide active" id="slide1">
@@ -1120,6 +1120,20 @@
                     <div class="term-card">
                         <div class="term-icon">👨‍💼</div>
                         <div class="term-content">
+                            <div class="term-value">Founder & CEO</div>
+                            <div style="color: white; margin: 5px 0;">Daniele Pauli</div>
+                            <div class="stat-info">
+                                • 20+ years experience as a Strength Coach<br>
+                                • Over 14,000 coached training sessions<br>
+                                • Specialization in strength training and VBT
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="term-card">
+                        <div class="term-icon">👨‍💻</div>
+                        <div class="term-content">
                             <div class="term-value">Technical Team</div>
                             <div style="color: white; margin: 5px 0;">Archonit Team</div>
                             <div class="stat-info">
@@ -1257,17 +1271,3 @@
                 </div>
             </div>
         </div>
-                            <div class="term-value">Founder & CEO</div>
-                            <div style="color: white; margin: 5px 0;">Daniele Pauli</div>
-                            <div class="stat-info">
-                                • 20+ years experience as a Strength Coach<br>
-                                • Over 14,000 coached training sessions<br>
-                                • Specialization in strength training and VBT
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="term-card">
-                        <div class="term-icon">👨‍💻</div>
-                        <div class="term-content">
