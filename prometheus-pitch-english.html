@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prometheus - Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #222;
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .pitch-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #111;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            background-color: #ff6600;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn {
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: #444;
+        }
+        
+        .slide-counter {
+            background-color: #333;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .slide {
+            display: none;
+            background-color: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            min-height: 80vh;
+            padding: 40px;
+        }
+        
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.3rem;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .vision-quote {
+            border-left: 4px solid #ff6600;
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+        
+        .points-list {
+            list-style-type: none;
+            margin-bottom: 30px;
+        }
+        
+        .points-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+        
+        .check-icon {
+            background-color: #ff6600;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            margin-top: 3px;
+            font-size: 12px;
+        }
+        
+        .two-columns {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        .column-title {
+            font-size: 1.3rem;
+            color: #ff6600;
+            margin-bottom: 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background-color: #222;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .stat-label {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .stat-info {
+            color: #ff6600;
+            font-size: 0.85rem;
+        }
+        
+        .pricing-container {
+            margin-top: 30px;
+        }
+        
+        .pricing-card {
+            background-color: #222;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-title {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .pricing-plans {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .plan {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        
+        .plan-name {
+            color: #999;
+            margin-bottom: 5px;
+        }
+        
+        .plan-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .plan-period {
+            color: #ff6600;
+            font-size: 0.85rem;
+        }
+        
+        .pricing-note {
+            color: #999;
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .investment-terms {
+            margin-top: 30px;
+        }
+        
+        .term-card {
+            display: flex;
+            align-items: center;
+            background-color: #222;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .term-icon {
+            background-color: #ff6600;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 20px;
+        }
+        
+        .term-content {
+            flex: 1;
+        }
+        
+        .term-label {
+            color: #999;
+            margin-bottom: 5px;
+        }
+        
+        .term-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .roi-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .roi-table th {
+            text-align: left;
+            padding: 12px;
+            background-color: #222;
+            border-bottom: 1px solid #444;
+            color: #999;
+        }
+        
+        .roi-table td {
+            padding: 12px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .roi-payment {
+            color: #ff6600;
+            font-weight: bold;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .summary-card {
+            background-color: #222;
+            border-radius: 6px;
+            padding: 15px;
+        }
+        
+        .summary-label {
+            color: #999;
+            margin-bottom: 5px;
+        }
+        
+        .summary-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .steps-list {
+            margin-top: 30px;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: center;
+            background-color: #222;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .step-number {
+            background-color: #ff6600;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .step-text {
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .quote-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .quote-main {
+            border-left: 4px solid #ff6600;
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #ddd;
+            line-height: 1.6;
+        }
+        
+        .quote-closing {
+            text-align: center;
+            color: #ff6600;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-top: 50px;
+        }
+        
+        .problem-statement {
+            background-color: #222;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .solution-statement {
+            background-color: #ff6600;
+            background-opacity: 0.1;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            color: white;
+        }
+        
+        .timeline {
+            margin-top: 40px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .timeline-item:not(:last-child):before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 15px;
+            height: calc(100% + 25px);
+            width: 2px;
+            background-color: #333;
+        }
+        
+        .timeline-marker {
+            background-color: #ff6600;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-content {
+            flex: 1;
+        }
+        
+        .timeline-date {
+            color: #ff6600;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-text {
+            color: white;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 30px;
+        }
+        
+        .comparison-table th {
+            text-align: left;
+            padding: 15px;
+            background-color: #222;
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+        }
+        
+        .comparison-table th:first-child {
+            border-top-left-radius: 8px;
+            border-left: 1px solid #444;
+        }
+        
+        .comparison-table th:last-child {
+            border-top-right-radius: 8px;
+            border-right: 1px solid #444;
+        }
+        
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #333;
+            border-right: 1px solid #333;
+        }
+        
+        .comparison-table td:first-child {
+            border-left: 1px solid #333;
+        }
+        
+        .comparison-table tr:last-child td:first-child {
+            border-bottom-left-radius: 8px;
+        }
+        
+        .comparison-table tr:last-child td:last-child {
+            border-bottom-right-radius: 8px;
+        }
+        
+        .comparison-yes {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .comparison-no {
+            color: #f44336;
+        }
+        
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px;
+                min-height: auto;
+            }
+            
+            .slide-title {
+                font-size: 1.8rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .two-columns {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-plans {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pitch-container">
+        <!-- Navigation controls -->
+        <div class="nav-controls">
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+                <div class="logo-text">PROMETHEUS</div>
+            </div>
+        
+        <!-- Slide 10: SUMMARY -->
+        <div class="slide" id="slide10">
+            <h1 class="slide-title">WHY PROMETHEUS</h1>
+            
+            <div class="centered-content">
+                <div class="quote-main">
+                    <p>• Revolutionary technology that makes strength training more precise and effective</p>
+                    <p>• Win-win business model for athletes, coaches, and investors</p>
+                    <p>• 82% lower customer acquisition costs through royalty model</p>
+                    <p>• 417% ROI over 5 years without equity dilution</p>
+                    <p>• Realistic projections with 15,000 users by year 5</p>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 1.1rem; color: #ddd; margin-bottom: 20px;">I greatly appreciate your entrepreneurial vision and interest in Prometheus. Beyond just capital, I'm seeking a mentor who believes in the future of intelligent coaching and wants to contribute their experience to the success of this promising project. As a strategic partner, you'll not only gain insight into our development through monthly updates but also be actively involved in our progress through integration into our Slack development chat and participation in selected team calls.</p>
+                </div>
+                
+                <p class="quote-closing">
+                    "Prometheus brings the fire of knowledge to every athlete and revolutionizes how we train, coach, and improve."
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple, robust code for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation buttons
+            var prevBtn = document.getElementById('prevBtn');
+            var nextBtn = document.getElementById('nextBtn');
+            var counter = document.getElementById('slideCounter');
+            
+            // Find all slides
+            var slides = document.querySelectorAll('.slide');
+            var currentSlideIndex = 0;
+            var totalSlides = slides.length;
+            
+            // Function to show current slide and hide others
+            function showSlide(index) {
+                // Hide all slides
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].classList.remove('active');
+                }
+                
+                // Show current slide
+                slides[index].classList.add('active');
+                
+                // Update counter
+                counter.textContent = (index + 1) + ' / ' + totalSlides;
+                
+                // Disable back button if first slide
+                prevBtn.disabled = index === 0;
+                prevBtn.style.opacity = index === 0 ? '0.5' : '1';
+                
+                // Disable next button if last slide
+                nextBtn.disabled = index === totalSlides - 1;
+                nextBtn.style.opacity = index === totalSlides - 1 ? '0.5' : '1';
+            }
+            
+            // Event listener for next button
+            nextBtn.addEventListener('click', function() {
+                if (currentSlideIndex < totalSlides - 1) {
+                    currentSlideIndex++;
+                    showSlide(currentSlideIndex);
+                }
+            });
+            
+            // Event listener for previous button
+            prevBtn.addEventListener('click', function() {
+                if (currentSlideIndex > 0) {
+                    currentSlideIndex--;
+                    showSlide(currentSlideIndex);
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                // Right arrow key
+                if (e.key === 'ArrowRight' && currentSlideIndex < totalSlides - 1) {
+                    currentSlideIndex++;
+                    showSlide(currentSlideIndex);
+                }
+                // Left arrow key
+                else if (e.key === 'ArrowLeft' && currentSlideIndex > 0) {
+                    currentSlideIndex--;
+                    showSlide(currentSlideIndex);
+                }
+            });
+            
+            // Initialization
+            showSlide(currentSlideIndex);
+        });
+    </script>
+</body>
+</html>
+        
+        <!-- Slide 9: STATUS & TIMELINE -->
+        <div class="slide" id="slide9">
+            <h1 class="slide-title">STATUS & TIMELINE</h1>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Now - Q2 2025</div>
+                        <div class="timeline-text">Finalizing app development, beta testing, and launch preparation</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q3 2025</div>
+                        <div class="timeline-text">Official launch with open access for all coaches, beginning of 1-year free period</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q4 2025</div>
+                        <div class="timeline-text">International availability and start of multi-influencer strategy</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q1-Q2 2026</div>
+                        <div class="timeline-text">Integration with leading wearables and smart fitness equipment</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">5</div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q3 2026</div>
+                        <div class="timeline-text">Start of first coach subscriptions after end of free period</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px; color: #ff6600;">Development Sprints</h3>
+            
+            <div style="overflow-x: auto; margin-top: 20px;">
+                <table style="width: 100%; border-collapse: collapse; min-width: 800px;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left; padding: 10px; border: 1px solid #333; background-color: #222;">Area</th>
+                            <th style="text-align: center; padding: 10px; border: 1px solid #333; background-color: #222;">Sprint 1-3</th>
+                            <th style="text-align: center; padding: 10px; border: 1px solid #333; background-color: #222;">Sprint 4-5</th>
+                            <th style="text-align: center; padding: 10px; border: 1px solid #333; background-color: #222;">Sprint 6-7</th>
+                            <th style="text-align: center; padding: 10px; border: 1px solid #333; background-color: #222;">Sprint 8-10</th>
+                            <th style="text-align: center; padding: 10px; border: 1px solid #333; background-color: #222;">Sprint 11-12</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #333; font-weight: bold; color: #ff6600;">ML</td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.2);">Active setup & development of the ML model, bar tracker, analytics</td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.1);">Support & testing</td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #333; font-weight: bold; color: #ff6600;">Mobile App</td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.2);">Project setup, Authorization & onboarding, User profile</td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.2);">Home page, Workouts, Analytics, Global search, Calendar</td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.1);">Subscription, Bugs fixing</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #333; font-weight: bold; color: #ff6600;">Backend</td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.2);">Project setup, architecture, database setup, Customer profiles, invitation system</td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.2);">Programs, workouts management, Search & admin, Workout analytics</td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.1);">Client management, calendar</td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.1);">Bugs fixing</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #333; font-weight: bold; color: #ff6600;">Frontend</td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.2);">Coach profile, authorization</td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.2);">Programs, workouts, Calendar, Client management</td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.1);">Messages, Bugs fixing</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #333; font-weight: bold; color: #ff6600;">QA</td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                            <td style="padding: 10px; border: 1px solid #333;"></td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.2);">Active platform testing</td>
+                            <td style="padding: 10px; border: 1px solid #333; background-color: rgba(255, 102, 0, 0.2);">RELEASE</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #333; font-weight: bold;">Cost</td>
+                            <td style="padding: 10px; border: 1px solid #333; text-align: center;">~8,500 CHF</td>
+                            <td style="padding: 10px; border: 1px solid #333; text-align: center;">~14,100 CHF</td>
+                            <td style="padding: 10px; border: 1px solid #333; text-align: center;">~20,000 CHF</td>
+                            <td style="padding: 10px; border: 1px solid #333; text-align: center;">~25,500 CHF</td>
+                            <td style="padding: 10px; border: 1px solid #333; text-align: center;">~11,700 CHF</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 20px; background-color: #222; padding: 15px; border-radius: 8px;">
+                <div style="text-align: center;">
+                    <div style="color: #999;">Low level</div>
+                    <div style="font-size: 1.2rem; font-weight: bold;">50,000 CHF</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #999;">Most likely</div>
+                    <div style="font-size: 1.2rem; font-weight: bold; color: #ff6600;">60,000 CHF</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #999;">High risk</div>
+                    <div style="font-size: 1.2rem; font-weight: bold;">70,000 CHF</div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px; color: #ff6600;">Investor Participation</h3>
+            
+            <div class="steps-list" style="margin-top: 20px;">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Agreement finalization & transfer to development account</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Access to investor dashboard with sprint tracking</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Direct payment of development invoices (50% sprint start, 50% after approval)</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-text">Integration into Slack development chat for sprint presentations</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-text">Participation in 2 team calls per month</div>
+                </div>
+            </div>
+        </div>
+            
+            <div class="controls">
+                <button class="btn" id="prevBtn">◀ Previous</button>
+                <div class="slide-counter" id="slideCounter">1 / 10</div>
+                <button class="btn" id="nextBtn">Next ▶</button>
+            </div>
+        </div>
+        
+        <!-- Slide 1: TITLE - Introduction and Problem -->
+        <div class="slide active" id="slide1">
+            <div class="logo" style="justify-content: center; margin-bottom: 40px;">
+                <div class="logo-icon" style="width: 60px; height: 60px; font-size: 30px;">⚡</div>
+                <div class="logo-text" style="font-size: 2.5rem;">PROMETHEUS</div>
+            </div>
+            <h2 class="slide-subtitle">Revolutionizing Strength Training through AI and VBT</h2>
+            
+            <div class="problem-statement">
+                <h3 style="color: #ff6600; margin-bottom: 15px;">THE PROBLEM</h3>
+                <p style="font-size: 1.2rem; line-height: 1.6;">Strength training remains inefficient and imprecise even today. Trainers can only manage a few clients simultaneously, while most athletes train without precise data and personalized guidance – leading to slow progress, plateaus, and injuries.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 2: SOLUTION -->
+        <div class="slide" id="slide2">
+            <h1 class="slide-title">THE SOLUTION: PROMETHEUS</h1>
+            
+            <div class="solution-statement" style="background-color: rgba(255, 102, 0, 0.2);">
+                <h3 style="margin-bottom: 15px;">AI-Powered Precision Coaching Platform</h3>
+                <p style="font-size: 1.2rem; line-height: 1.6;">Prometheus combines advanced technology and sports science to enable personalized, data-driven training for every strength athlete.</p>
+            </div>
+            
+            <div class="two-columns">
+                <div class="column">
+                    <h3 class="column-title">For Athletes</h3>
+                    <ul class="points-list">
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>AI Coach with Real-time Feedback</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Bar Path Analysis & VBT Metrics</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Automatic Training Adjustments</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Nutrition Tracking with Performance Correlation</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3 class="column-title">For Coaches</h3>
+                    <ul class="points-list">
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Unlimited Client Management</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>AI-Powered Engagement Monitoring</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Automated Training Plans</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Passive Income through Royalty Program</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: BUSINESS MODEL -->
+        <div class="slide" id="slide3">
+            <h1 class="slide-title">BUSINESS MODEL</h1>
+            
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Athlete App</h3>
+                    <div class="pricing-plans">
+                        <div class="plan">
+                            <div class="plan-name">Monthly</div>
+                            <div class="plan-price">19.99 CHF</div>
+                            <div class="plan-period">per month</div>
+                        </div>
+                        <div class="plan">
+                            <div class="plan-name">Annual</div>
+                            <div class="plan-price">199 CHF</div>
+                            <div class="plan-period">per year (16% savings)</div>
+                        </div>
+                    </div>
+                    <div class="pricing-note">All features included, no premium tiers</div>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Coach Software (after free year)</h3>
+                    <div class="pricing-plans">
+                        <div class="plan">
+                            <div class="plan-name">Basic</div>
+                            <div class="plan-price">50 CHF</div>
+                            <div class="plan-period">per month (up to 50 clients)</div>
+                        </div>
+                        <div class="plan">
+                            <div class="plan-name">Professional</div>
+                            <div class="plan-price">100 CHF</div>
+                            <div class="plan-period">per month (up to 100 clients)</div>
+                        </div>
+                        <div class="plan">
+                            <div class="plan-name">Enterprise</div>
+                            <div class="plan-price">150 CHF</div>
+                            <div class="plan-period">per month (up to 150 clients)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="term-card" style="margin-top: 30px;">
+                    <div class="term-icon">💰</div>
+                    <div class="term-content">
+                        <div class="term-value">Innovative Coach Royalty Model</div>
+                        <div class="stat-info">4 CHF per referred subscriber on a lifetime basis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 4: TECHNOLOGY -->
+        <div class="slide" id="slide4">
+            <h1 class="slide-title">OUR TECHNOLOGY</h1>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Bar Path Analysis</div>
+                    <div class="stat-value">AI Vision</div>
+                    <div class="stat-info">Precise movement analysis without additional hardware</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Velocity Based Training</div>
+                    <div class="stat-value">0.01 m/s</div>
+                    <div class="stat-info">Precise measurement of barbell velocity (m/s)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Autoregulation</div>
+                    <div class="stat-value">AI Adaptation</div>
+                    <div class="stat-info">Individual adjustment to daily performance capability</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Nutrition Correlation</div>
+                    <div class="stat-value">Data Fusion</div>
+                    <div class="stat-info">Direct connection between nutrition and performance</div>
+                </div>
+            </div>
+            
+            <div class="term-card" style="margin-top: 30px;">
+                <div class="term-icon">🔒</div>
+                <div class="term-content">
+                    <div class="term-value">Proprietary Algorithms</div>
+                    <div class="stat-info">Based on sports science principles and machine learning with millions of training data points</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: MARKETING & DISTRIBUTION -->
+        <div class="slide" id="slide5">
+            <h1 class="slide-title">MARKETING & DISTRIBUTION</h1>
+            
+            <div class="term-card">
+                <div class="term-icon">📊</div>
+                <div class="term-content">
+                    <div class="term-value">CAC Comparison: 82% Lower Customer Acquisition Costs</div>
+                    <div class="stat-info">Traditional acquisition: 22 CHF per customer vs. Prometheus Royalty: 4 CHF per customer</div>
+                </div>
+            </div>
+            
+            <div class="two-columns" style="margin-top: 30px;">
+                <div class="column">
+                    <h3 class="column-title">Multi-Influencer Strategy</h3>
+                    <ul class="points-list">
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Simultaneous promotion by fitness influencers</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>4 CHF royalty model also for influencers</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Passive income source for content creators</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Authentic recommendations instead of expensive advertising</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3 class="column-title">Coach Network Effect</h3>
+                    <ul class="points-list">
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>1 year free full access for all coaches</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Coaches bring their own clients and networks</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Win-win through passive income for coaches</span>
+                        </li>
+                        <li>
+                            <div class="check-icon">✓</div>
+                            <span>Exponential growth through multipliers</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 6: COMPETITION -->
+        <div class="slide" id="slide6">
+            <h1 class="slide-title">COMPETITIVE ANALYSIS</h1>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>Prometheus</th>
+                    <th>StrongLifts</th>
+                    <th>FitBod</th>
+                    <th>JuggernautAI</th>
+                </tr>
+                <tr>
+                    <td>VBT Analysis</td>
+                    <td class="comparison-yes">✓</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-no">✗</td>
+                </tr>
+                <tr>
+                    <td>Bar Path Analysis</td>
+                    <td class="comparison-yes">✓</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-no">✗</td>
+                </tr>
+                <tr>
+                    <td>Real-time AI Coaching</td>
+                    <td class="comparison-yes">✓</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-no">✗</td>
+                </tr>
+                <tr>
+                    <td>Coach Platform</td>
+                    <td class="comparison-yes">✓</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-no">✗</td>
+                </tr>
+                <tr>
+                    <td>Royalty Program</td>
+                    <td class="comparison-yes">✓</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-no">✗</td>
+                </tr>
+                <tr>
+                    <td>Nutrition Correlation</td>
+                    <td class="comparison-yes">✓</td>
+                    <td class="comparison-no">✗</td>
+                    <td class="comparison-yes">✓</td>
+                    <td class="comparison-no">✗</td>
+                </tr>
+            </table>
+            
+            <div class="term-card" style="margin-top: 30px;">
+                <div class="term-icon">🏆</div>
+                <div class="term-content">
+                    <div class="term-value">Unique Selling Points</div>
+                    <div class="stat-info">Only platform with combined VBT and Bar Path analysis, AI coaching, coach platform, and royalty program</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 7: TEAM -->
+        <div class="slide" id="slide7">
+            <h1 class="slide-title">OUR TEAM</h1>
+            
+            <div class="two-columns">
+                <div class="column">
+                    <div class="term-card">
+                        <div class="term-icon">👨‍💼</div>
+                        <div class="term-content">
+                            <div class="term-value">Technical Team</div>
+                            <div style="color: white; margin: 5px 0;">Archonit Team</div>
+                            <div class="stat-info">
+                                • Computer Vision Specialists<br>
+                                • Experienced Full-Stack Developers<br>
+                                • Machine Learning Engineers
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="term-card" style="margin-top: 30px;">
+                <div class="term-icon">🔍</div>
+                <div class="term-content">
+                    <div class="term-value">What Drives Us</div>
+                    <div class="stat-info">We are convinced that strength training can be revolutionized through precise data analysis, personalized coaching, and science-based methods. Prometheus is the result of years of practical experience and technological innovation.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 8: PROJECTIONS & MILESTONES -->
+        <div class="slide" id="slide8">
+            <h1 class="slide-title">PROJECTIONS & MILESTONES</h1>
+            
+            <div class="two-columns">
+                <div class="column">
+                    <h3 class="column-title">Financial Projections</h3>
+                    <table class="roi-table">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Users</th>
+                                <th>Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>1,500</td>
+                                <td>298,500 CHF</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>3,000</td>
+                                <td>597,000 CHF</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>6,000</td>
+                                <td>1,194,000 CHF</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>10,000</td>
+                                <td>1,990,000 CHF</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>15,000</td>
+                                <td>2,985,000 CHF</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="column">
+                    <h3 class="column-title">Investor ROI</h3>
+                    <table class="roi-table">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Royalty %</th>
+                                <th>Payout</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>7%</td>
+                                <td class="roi-payment">20,895 CHF</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>7%</td>
+                                <td class="roi-payment">41,790 CHF</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>5%</td>
+                                <td class="roi-payment">59,700 CHF</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>4%</td>
+                                <td class="roi-payment">79,600 CHF</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>3%</td>
+                                <td class="roi-payment">48,015 CHF</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="summary-cards" style="grid-template-columns: repeat(2, 1fr);">
+                        <div class="summary-card">
+                            <div class="summary-label">Total Royalty</div>
+                            <div class="summary-value">250,000 CHF</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-label">ROI</div>
+                            <div class="summary-value">417% over 5 years</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="investment-terms" style="margin-top: 20px;">
+                <div class="term-card">
+                    <div class="term-icon">💰</div>
+                    <div class="term-content">
+                        <div class="term-label">Investment</div>
+                        <div class="term-value">60,000 CHF for Royalty Model</div>
+                        <div class="stat-info">Royalty payments capped at 250,000 CHF total amount</div>
+                    </div>
+                </div>
+                
+                <div class="term-card" style="margin-top: 30px;">
+                    <div class="term-icon">💰</div>
+                    <div class="term-content">
+                        <div class="term-value">Investment Structure</div>
+                        <div class="stat-info">Direct financing of development sprints based on progress: 50% at sprint start, 50% after successful sprint presentation. Initial investment (10,000 CHF) already made by founder.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                            <div class="term-value">Founder & CEO</div>
+                            <div style="color: white; margin: 5px 0;">Daniele Pauli</div>
+                            <div class="stat-info">
+                                • 20+ years experience as a Strength Coach<br>
+                                • Over 14,000 coached training sessions<br>
+                                • Specialization in strength training and VBT
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="term-card">
+                        <div class="term-icon">👨‍💻</div>
+                        <div class="term-content">
